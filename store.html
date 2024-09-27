@@ -4,159 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NileCast: Connecting You to TV Worldwide</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
         }
         .container {
-            max-width: 600px;
+            max-width: 390px;
             margin: 0 auto;
-            padding: 16px;
+            padding: 20px;
         }
         .header {
-            text-align: center;
-            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
         }
         .app-icon {
-            width: 96px;
-            height: 96px;
-            border-radius: 25px;
-            margin-bottom: 12px;
+            width: 64px;
+            height: 64px;
+            margin-right: 20px;
+            border-radius: 12px;
         }
         .app-info h1 {
-            margin: 0 0 8px 0;
-            font-size: 24px;
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
         }
-        .app-meta {
-            font-size: 14px;
-            color: #666;
+        .app-info p {
             margin: 4px 0;
+            font-size: 13px;
+            color: var(--tg-theme-hint-color, #999999);
         }
         .app-stats {
-            background-color: white;
-            border-radius: 25px;
-            padding: 16px;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
-            text-align: center;
+            margin-bottom: 20px;
+            padding: 12px 0;
+            border-top: 1px solid var(--tg-theme-hint-color, #e0e0e0);
+            border-bottom: 1px solid var(--tg-theme-hint-color, #e0e0e0);
         }
         .stat-item {
-            flex: 1;
+            text-align: center;
         }
         .stat-value {
-            font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 500;
         }
         .stat-label {
-            font-size: 12px;
-            color: #666;
+            font-size: 13px;
+            color: var(--tg-theme-hint-color, #999999);
         }
         .button-container {
             display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
+            justify-content: space-between;
+            margin-top: 20px;
         }
         .button {
             flex: 1;
-            padding: 12px;
-            text-align: center;
+            padding: 12px 20px;
             border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            transition: background-color 0.3s;
         }
-        .install-btn {
-            background-color: #4285f4;
-            color: white;
+        #installBtn {
+            background-color: var(--tg-theme-button-color, #50a8eb);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            margin-right: 8px;
         }
-        .share-btn {
-            background-color: #34a853;
-            color: white;
+        #shareBtn {
+            background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+            color: var(--tg-theme-text-color, #000000);
+            margin-left: 8px;
         }
         .screenshots-container {
-            position: relative;
-            margin-bottom: 16px;
-            border-radius: 25px;
+            margin-top: 20px;
             overflow: hidden;
         }
         .screenshots {
+            display: flex;
             overflow-x: auto;
-            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            scroll-behavior: smooth;
-            padding: 8px;
         }
-        .screenshots::-webkit-scrollbar { 
-            width: 0;
-            height: 0;
+        .screenshots::-webkit-scrollbar {
+            display: none;
         }
         .screenshot {
-            display: inline-block;
+            flex: 0 0 auto;
             width: 200px;
-            height: 355px;
-            margin-right: 8px;
-            border-radius: 25px;
+            height: auto;
+            margin-right: 10px;
+            scroll-snap-align: start;
+            border-radius: 8px;
         }
-        .scroll-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.7);
-            border: none;
-            border-radius: 25px;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        .scroll-left { left: 8px; }
-        .scroll-right { right: 8px; }
         .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 8px;
+            margin-top: 30px;
+            font-size: 17px;
+            font-weight: 600;
         }
         .tags {
-            margin-bottom: 8px;
+            margin-top: 10px;
         }
         .tag {
             display: inline-block;
-            background-color: #e0e0e0;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 12px;
+            background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+            color: var(--tg-theme-text-color, #000000);
+            padding: 6px 12px;
+            border-radius: 16px;
             margin-right: 8px;
             margin-bottom: 8px;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 14px;
-            color: #666;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
+        <div class="header">
             <img src="https://github.com/NileCast/AppGram/blob/2f8dcf9a495287bc7793c73df3fb7b07dea48e97/assets/Nilecast-Logo.png?raw=true" alt="NileCast icon" class="app-icon">
             <div class="app-info">
                 <h1>NileCast: Connecting You to TV Worldwide</h1>
-                <p class="app-meta">Nile Brodcasting, Inc.</p>
-                <p class="app-meta">nilecast.tv</p>
+                <p>Nile Broadcasting, Inc.</p>
+                <p>nilecast.tv</p>
             </div>
-        </header>
+        </div>
 
         <div class="app-stats">
             <div class="stat-item">
@@ -174,44 +154,82 @@
         </div>
 
         <div class="button-container">
-            <button class="button install-btn">Install</button>
-            <button class="button share-btn">Share</button>
+            <button id="installBtn" class="button">Install</button>
+            <button id="shareBtn" class="button">Share</button>
         </div>
 
         <div class="screenshots-container">
-            <div class="screenshots" id="screenshots">
+            <div id="screenshots" class="screenshots">
                 <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen0.png?raw=true" alt="NileCast screenshot 1" class="screenshot">
                 <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen1.png?raw=true" alt="NileCast screenshot 2" class="screenshot">
                 <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen2.png?raw=true" alt="NileCast screenshot 3" class="screenshot">
                 <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen3.png?raw=true" alt="NileCast screenshot 4" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true" alt="NileCast screenshot 3" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true" alt="NileCast screenshot 4" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true" alt="NileCast screenshot 5" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true" alt="NileCast screenshot 6" class="screenshot">
             </div>
-            <button class="scroll-btn scroll-left" onclick="scrollScreenshots(-1)">❮</button>
-            <button class="scroll-btn scroll-right" onclick="scrollScreenshots(1)">❯</button>
         </div>
 
-        <h2 class="section-title">About this app</h2>
+        <h2 id="about-this-app" class="section-title">About this app</h2>
         <div class="tags">
             <span class="tag">Entertainment</span>
             <span class="tag">Streaming Content</span>
             <span class="tag">Live TV</span>
         </div>
-        <p>NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, 
-            access your favorite African and international channels with just a tap. Stream sports, movies, news, 
-            entertainment, and more—all in one convenient app.</p>
-
-        <footer class="footer">
-            Powered By AppGram Inc.
-        </footer>
+        <p>NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, access your favorite African and international channels with just a tap. Stream sports, movies, news, entertainment, and more—all in one convenient app.</p>
+        <p>Powered By AppGram Inc.</p>
     </div>
 
     <script>
-        function scrollScreenshots(direction) {
-            const container = document.getElementById('screenshots');
-            const scrollAmount = 220; // Adjust this value based on your preference
-            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        let tg = window.Telegram.WebApp;
+
+        const installBtn = document.getElementById('installBtn');
+        const shareBtn = document.getElementById('shareBtn');
+
+        installBtn.addEventListener('click', function() {
+            if (this.textContent === 'Install') {
+                initiateDownload();
+            } else if (this.textContent === 'Open') {
+                tg.showAlert('Opening NileCast app...');
+                // In a real scenario, you might use a custom URL scheme to open the app
+                // window.location.href = 'nilecast://open';
+            }
+        });
+
+        shareBtn.addEventListener('click', function() {
+            tg.showPopup({
+                title: 'Share NileCast',
+                message: 'Would you like to share NileCast with your friends?',
+                buttons: [
+                    {id: 'share', type: 'ok', text: 'Share'},
+                    {id: 'cancel', type: 'cancel', text: 'Cancel'}
+                ]
+            }, function(buttonId) {
+                if (buttonId === 'share') {
+                    tg.shareUrl('https://t.me/nilecast');
+                }
+            });
+        });
+
+        function initiateDownload() {
+            // In a real implementation, this would make an API call to your backend
+            fetch('https://api.nilecast.tv/get-download-url')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.downloadUrl) {
+                        tg.showAlert('Download starting. Please check your notifications.');
+                        window.open(data.downloadUrl, '_blank');
+                        installBtn.textContent = 'Open';
+                    } else {
+                        tg.showAlert('Download failed. Please try again later.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    tg.showAlert('An error occurred. Please try again later.');
+                });
         }
+
+        tg.expand();
     </script>
 </body>
 </html>
