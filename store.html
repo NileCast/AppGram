@@ -7,15 +7,16 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
             margin: 0;
             padding: 0;
             background-color: var(--tg-theme-bg-color, #ffffff);
             color: var(--tg-theme-text-color, #000000);
         }
         .container {
-            max-width: 390px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: auto;
             padding: 20px;
         }
         .header {
@@ -24,111 +25,177 @@
             margin-bottom: 20px;
         }
         .app-icon {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             margin-right: 20px;
-            border-radius: 12px;
+            border-radius: 15px;
         }
         .app-info h1 {
             margin: 0;
-            font-size: 17px;
-            font-weight: 600;
+            font-size: 24px;
+            font-weight: bold;
         }
         .app-info p {
-            margin: 4px 0;
-            font-size: 13px;
+            margin: 5px 0;
             color: var(--tg-theme-hint-color, #999999);
         }
         .app-stats {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            padding: 12px 0;
-            border-top: 1px solid var(--tg-theme-hint-color, #e0e0e0);
-            border-bottom: 1px solid var(--tg-theme-hint-color, #e0e0e0);
+            justify-content: space-around;
+            margin: 20px 0;
+            background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
+            border-radius: 10px;
+            padding: 10px;
         }
         .stat-item {
             text-align: center;
         }
         .stat-value {
-            font-size: 15px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: bold;
         }
         .stat-label {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--tg-theme-hint-color, #999999);
         }
         .button-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
+            margin: 20px 0;
         }
-        .button {
-            flex: 1;
-            padding: 12px 20px;
+        .update-button {
+            position: relative;
+        }
+        .update-indicator {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ff4500;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .download-button, .share-button {
+            padding: 10px 20px;
+            font-size: 16px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: center;
             transition: background-color 0.3s;
         }
-        #installBtn {
+        .download-button {
             background-color: var(--tg-theme-button-color, #50a8eb);
             color: var(--tg-theme-button-text-color, #ffffff);
-            margin-right: 8px;
         }
-        #shareBtn {
+        .share-button {
             background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
             color: var(--tg-theme-text-color, #000000);
-            margin-left: 8px;
+        }
+        .download-button:hover, .share-button:hover {
+            opacity: 0.8;
         }
         .screenshots-container {
-            margin-top: 20px;
+            position: relative;
+            margin: 20px 0;
             overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
         }
         .screenshots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            transition: transform 0.3s ease;
         }
-        .screenshots::-webkit-scrollbar {
-            display: none;
+        .screenshot-group {
+            display: flex;
+            flex-shrink: 0;
+            width: 100%;
         }
         .screenshot {
-            flex: 0 0 auto;
-            width: 200px;
-            height: 355px;
-            margin-right: 10px;
-            scroll-snap-align: start;
-            border-radius: 8px;
+            height: 100%;
             object-fit: cover;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+        .nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .nav-button.prev {
+            left: 10px;
+        }
+        .nav-button.next {
+            right: 10px;
+        }
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .section-title {
+            font-size: 20px;
             margin-top: 30px;
-            font-size: 17px;
-            font-weight: 600;
+            font-weight: bold;
         }
         .tags {
-            margin-top: 10px;
+            margin: 10px 0;
         }
         .tag {
             display: inline-block;
             background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
-            color: var(--tg-theme-text-color, #000000);
-            padding: 6px 12px;
-            border-radius: 16px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            font-size: 13px;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        /* Responsive design for screenshot groups */
+        @media (max-width: 600px) {
+            .screenshot {
+                width: 100%;
+            }
+        }
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .screenshot {
+                width: 50%;
+            }
+        }
+        @media (min-width: 1025px) {
+            .screenshot {
+                width: 33.33%;
+            }
+        }
+        #backButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
+    <button id="backButton">&larr; Back</button>
     <div class="container">
         <div class="header">
             <img src="https://github.com/NileCast/AppGram/blob/2f8dcf9a495287bc7793c73df3fb7b07dea48e97/assets/Nilecast-Logo.png?raw=true" alt="NileCast icon" class="app-icon">
@@ -155,87 +222,156 @@
         </div>
 
         <div class="button-container">
-            <button id="installBtn" class="button">Download & Install</button>
-            <button id="shareBtn" class="button">Share</button>
+            <div class="update-button">
+                <span class="update-indicator">NEW</span>
+                <button class="download-button">Download & Install</button>
+            </div>
+            <button class="share-button">Share</button>
         </div>
 
         <div class="screenshots-container">
+            <button class="nav-button prev" onclick="navigate(-1)" disabled>&lt;</button>
+            <button class="nav-button next" onclick="navigate(1)">&gt;</button>
             <div id="screenshots" class="screenshots">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen0.png?raw=true" alt="NileCast screenshot 1" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen1.png?raw=true" alt="NileCast screenshot 2" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen2.png?raw=true" alt="NileCast screenshot 3" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen3.png?raw=true" alt="NileCast screenshot 4" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true" alt="NileCast screenshot 5" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true" alt="NileCast screenshot 6" class="screenshot">
+                <!-- Screenshot groups will be dynamically created by JavaScript -->
             </div>
         </div>
 
         <h2 id="about-this-app" class="section-title">About this app</h2>
+
         <div class="tags">
             <span class="tag">Entertainment</span>
             <span class="tag">Streaming Content</span>
             <span class="tag">Live TV</span>
         </div>
-        <p>NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, access your favorite African and international channels with just a tap. Stream sports, movies, news, entertainment, and more—all in one convenient app.</p>
+
+        <p>
+            NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, 
+            access your favorite African and international channels with just a tap. Stream sports, movies, news, 
+            entertainment, and more—all in one convenient app.
+        </p>
+
         <p>Powered By AppGram Inc.</p>
     </div>
 
     <script>
-        let tg = window.Telegram.WebApp;
+        // Initialize Telegram WebApp
+        const tg = window.Telegram.WebApp;
 
-        const installBtn = document.getElementById('installBtn');
-        const shareBtn = document.getElementById('shareBtn');
+        // Tell Telegram that the Mini App is ready to be displayed
+        tg.ready();
 
-        installBtn.addEventListener('click', function() {
-            initiateDownload();
+        // Set the header color to match the app's theme
+        tg.setHeaderColor(tg.themeParams.bg_color);
+
+        // Get DOM elements
+        const backButton = document.getElementById('backButton');
+        const downloadButton = document.querySelector('.download-button');
+        const shareButton = document.querySelector('.share-button');
+
+        const screenshotUrls = [
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen0.png?raw=true",
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen1.png?raw=true",
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen2.png?raw=true",
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen3.png?raw=true",
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true",
+            "https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true"
+        ];
+
+        let currentIndex = 0;
+        const container = document.querySelector('.screenshots');
+        const prevButton = document.querySelector('.nav-button.prev');
+        const nextButton = document.querySelector('.nav-button.next');
+
+        function getScreenshotsPerGroup() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 1024) return 2;
+            return 3;
+        }
+
+        function createScreenshotGroups() {
+            container.innerHTML = '';
+            const screenshotsPerGroup = getScreenshotsPerGroup();
+            for (let i = 0; i < screenshotUrls.length; i += screenshotsPerGroup) {
+                const group = document.createElement('div');
+                group.className = 'screenshot-group';
+                for (let j = i; j < i + screenshotsPerGroup && j < screenshotUrls.length; j++) {
+                    const img = document.createElement('img');
+                    img.src = screenshotUrls[j];
+                    img.alt = `NileCast screenshot ${j + 1}`;
+                    img.className = 'screenshot';
+                    group.appendChild(img);
+                }
+                container.appendChild(group);
+            }
+        }
+
+        function navigate(direction) {
+            const screenshotGroups = document.querySelectorAll('.screenshot-group');
+            currentIndex += direction;
+            currentIndex = Math.max(0, Math.min(currentIndex, screenshotGroups.length - 1));
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            const screenshotGroups = document.querySelectorAll('.screenshot-group');
+            container.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === screenshotGroups.length - 1;
+        }
+
+        // Telegram-specific functionality
+        function showBackButton() {
+            backButton.style.display = 'block';
+            tg.BackButton.show();
+        }
+
+        function hideBackButton() {
+            backButton.style.display = 'none';
+            tg.BackButton.hide();
+        }
+
+        // Event listeners for Telegram BackButton
+        tg.BackButton.onClick(hideBackButton);
+        backButton.addEventListener('click', hideBackButton);
+
+        // Event listener for Download button
+        downloadButton.addEventListener('click', () => {
+            tg.openLink('https://github.com/NileCast/AppGram/raw/refs/heads/main/build/NileCast.apk');
         });
 
-        shareBtn.addEventListener('click', function() {
-            shareApp();
+        // Event listener for Share button
+        shareButton.addEventListener('click', () => {
+            tg.shareUrl('https://t.me/NileCast_Bot');
         });
 
-        function initiateDownload() {
-            const apkUrl = 'https://github.com/NileCast/AppGram/raw/refs/heads/main/build/NileCast.apk';
-            
-            tg.showConfirm('Do you want to download and install NileCast?', function(confirmed) {
-                if (confirmed) {
-                    tg.showAlert('Download starting. Please check your notifications.');
-                    window.open(apkUrl, '_blank');
-                    
-                    // In a real-world scenario, you might want to check if the download was successful
-                    // before changing the button text. For now, we'll just change it after a delay.
-                    setTimeout(() => {
-                        installBtn.textContent = 'Open App';
-                        installBtn.removeEventListener('click', initiateDownload);
-                        installBtn.addEventListener('click', openApp);
-                    }, 5000); // Change after 5 seconds, adjust as needed
-                }
-            });
-        }
+        // Show back button when a screenshot is clicked
+        container.addEventListener('click', (e) => {
+            if (e.target.classList.contains('screenshot')) {
+                showBackButton();
+                // Here you can add code to show a full-screen version of the clicked screenshot
+            }
+        });
 
-        function openApp() {
-            tg.showAlert('Opening NileCast app...');
-            // In a real scenario, you would use a custom URL scheme to open the app
-            // window.location.href = 'nilecast://open';
-        }
-
-        function shareApp() {
-            const shareUrl = 'https://t.me/NileCast_Bot';
-            tg.showPopup({
-                title: 'Share NileCast',
-                message: 'Would you like to share NileCast with your friends?',
-                buttons: [
-                    {id: 'share', type: 'ok', text: 'Share'},
-                    {id: 'cancel', type: 'cancel', text: 'Cancel'}
-                ]
-            }, function(buttonId) {
-                if (buttonId === 'share') {
-                    tg.shareUrl(shareUrl);
-                }
-            });
-        }
-
+        // Expand viewport height to full screen
         tg.expand();
+
+        // Handle closing of the Mini App
+        tg.onEvent('viewportChanged', tg.expand);
+
+        // Use the theme from Telegram
+        document.body.className = tg.colorScheme;
+
+        // Initial setup
+        createScreenshotGroups();
+        updateNavigation();
+
+        // Update layout on window resize
+        window.addEventListener('resize', () => {
+            createScreenshotGroups();
+            currentIndex = 0;
+            updateNavigation();
+        });
     </script>
 </body>
 </html>
