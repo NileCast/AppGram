@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plex: Stream Movies & TV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 16px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .app-icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .app-info h1 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+        }
+        .app-meta {
+            font-size: 14px;
+            color: #666;
+            margin: 4px 0;
+        }
+        .app-stats {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .stat-item {
+            flex: 1;
+        }
+        .stat-value {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        .button-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .button {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .install-btn {
+            background-color: #4285f4;
+            color: white;
+        }
+        .share-btn {
+            background-color: #34a853;
+            color: white;
+        }
+        .screenshots {
+            overflow-x: auto;
+            white-space: nowrap;
+            margin-bottom: 16px;
+            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        }
+        .screenshots::-webkit-scrollbar { 
+            width: 0;
+            height: 0;
+        }
+        .screenshot {
+            display: inline-block;
+            width: 200px;
+            height: 355px;
+            margin-right: 8px;
+            border-radius: 8px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .tags {
+            margin-bottom: 8px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            padding: 4px 8px;
+            border-radius: 16px;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="https://play-lh.googleusercontent.com/G7jAks-PRl4d7IkL-s3Ir44nGyPq0Yh872N5UMwZYIJz4wG1Oj0DqoQjsAR5ddKZbQ=w240-h480-rw" alt="Plex icon" class="app-icon">
+            <div class="app-info">
+                <h1>Plex: Stream Movies & TV</h1>
+                <p class="app-meta">Plex, Inc.</p>
+                <p class="app-meta">Contains ads • In-app purchases</p>
+            </div>
+        </header>
+
+        <div class="app-stats">
+            <div class="stat-item">
+                <div class="stat-value">50 MB</div>
+                <div class="stat-label">Size</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">10M+</div>
+                <div class="stat-label">Downloads</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">334K</div>
+                <div class="stat-label">Reviews</div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="button install-btn">Install</button>
+            <button class="button share-btn">Share</button>
+        </div>
+
+        <div class="screenshots">
+            <img src="https://via.placeholder.com/200x355/FFD700/000000?text=Plex+1" alt="Plex screenshot 1" class="screenshot">
+            <img src="https://via.placeholder.com/200x355/4CAF50/FFFFFF?text=Plex+2" alt="Plex screenshot 2" class="screenshot">
+            <img src="https://via.placeholder.com/200x355/2196F3/FFFFFF?text=Plex+3" alt="Plex screenshot 3" class="screenshot">
+            <img src="https://via.placeholder.com/200x355/FF5722/FFFFFF?text=Plex+4" alt="Plex screenshot 4" class="screenshot">
+        </div>
+
+        <h2 class="section-title">About this app</h2>
+        <div class="tags">
+            <span class="tag">Entertainment</span>
+            <span class="tag">Streaming content</span>
+        </div>
+        <p>Stream movies and live TV on almost any device without a subscription.</p>
+    </div>
+</body>
+</html>
