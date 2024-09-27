@@ -245,7 +245,11 @@
 
         // Share button functionality - Share the NileCast Bot link using Telegram's share functionality
         shareBtn.addEventListener('click', function () {
-            tg.shareAppUrl('https://t.me/NileCast_Bot'); // Using Telegram's share functionality to share the bot link
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.shareUrl('https://t.me/NileCast_Bot');
+            } else {
+                console.error('Telegram WebApp is not available');
+            }
         });
 
         // Function to initiate download of APK
