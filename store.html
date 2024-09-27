@@ -155,7 +155,7 @@
         </div>
 
         <div class="button-container">
-            <button id="installBtn" class="button">Install</button>
+            <button id="installBtn" class="button">Download & Install</button>
             <button id="shareBtn" class="button">Share</button>
         </div>
 
@@ -187,16 +187,40 @@
         const shareBtn = document.getElementById('shareBtn');
 
         installBtn.addEventListener('click', function() {
-            if (this.textContent === 'Install') {
-                initiateDownload();
-            } else if (this.textContent === 'Open') {
-                tg.showAlert('Opening NileCast app...');
-                // In a real scenario, you might use a custom URL scheme to open the app
-                // window.location.href = 'nilecast://open';
-            }
+            initiateDownload();
         });
 
         shareBtn.addEventListener('click', function() {
+            shareApp();
+        });
+
+        function initiateDownload() {
+            const apkUrl = 'https://github.com/NileCast/AppGram/raw/refs/heads/main/build/NileCast.apk';
+            
+            tg.showConfirm('Do you want to download and install NileCast?', function(confirmed) {
+                if (confirmed) {
+                    tg.showAlert('Download starting. Please check your notifications.');
+                    window.open(apkUrl, '_blank');
+                    
+                    // In a real-world scenario, you might want to check if the download was successful
+                    // before changing the button text. For now, we'll just change it after a delay.
+                    setTimeout(() => {
+                        installBtn.textContent = 'Open App';
+                        installBtn.removeEventListener('click', initiateDownload);
+                        installBtn.addEventListener('click', openApp);
+                    }, 5000); // Change after 5 seconds, adjust as needed
+                }
+            });
+        }
+
+        function openApp() {
+            tg.showAlert('Opening NileCast app...');
+            // In a real scenario, you would use a custom URL scheme to open the app
+            // window.location.href = 'nilecast://open';
+        }
+
+        function shareApp() {
+            const shareUrl = 'https://t.me/NileCast_Bot';
             tg.showPopup({
                 title: 'Share NileCast',
                 message: 'Would you like to share NileCast with your friends?',
@@ -206,29 +230,9 @@
                 ]
             }, function(buttonId) {
                 if (buttonId === 'share') {
-                    // Use the correct method name: shareAppUrl instead of shareUrl
-                    tg.shareAppUrl('https://t.me/nilecast');
+                    tg.shareUrl(shareUrl);
                 }
             });
-        });
-
-        function initiateDownload() {
-            // In a real implementation, this would make an API call to your backend
-            fetch('https://api.nilecast.tv/get-download-url')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.downloadUrl) {
-                        tg.showAlert('Download starting. Please check your notifications.');
-                        window.open(data.downloadUrl, '_blank');
-                        installBtn.textContent = 'Open';
-                    } else {
-                        tg.showAlert('Download failed. Please try again later.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    tg.showAlert('An error occurred. Please try again later.');
-                });
         }
 
         tg.expand();
