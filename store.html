@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,32 +14,38 @@
             background-color: var(--tg-theme-bg-color, #ffffff);
             color: var(--tg-theme-text-color, #000000);
         }
+
         .container {
             max-width: 390px;
             margin: 0 auto;
             padding: 20px;
         }
+
         .header {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
         }
+
         .app-icon {
             width: 64px;
             height: 64px;
             margin-right: 20px;
             border-radius: 12px;
         }
+
         .app-info h1 {
             margin: 0;
             font-size: 17px;
             font-weight: 600;
         }
+
         .app-info p {
             margin: 4px 0;
             font-size: 13px;
             color: var(--tg-theme-hint-color, #999999);
         }
+
         .app-stats {
             display: flex;
             justify-content: space-between;
@@ -46,22 +54,27 @@
             border-top: 1px solid var(--tg-theme-hint-color, #e0e0e0);
             border-bottom: 1px solid var(--tg-theme-hint-color, #e0e0e0);
         }
+
         .stat-item {
             text-align: center;
         }
+
         .stat-value {
             font-size: 15px;
             font-weight: 500;
         }
+
         .stat-label {
             font-size: 13px;
             color: var(--tg-theme-hint-color, #999999);
         }
+
         .button-container {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
+
         .button {
             flex: 1;
             padding: 12px 20px;
@@ -73,20 +86,39 @@
             text-align: center;
             transition: background-color 0.3s;
         }
+
         #installBtn {
             background-color: var(--tg-theme-button-color, #50a8eb);
             color: var(--tg-theme-button-text-color, #ffffff);
             margin-right: 8px;
+            position: relative;
         }
+
         #shareBtn {
             background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
             color: var(--tg-theme-text-color, #000000);
             margin-left: 8px;
         }
+
+        /* New Indicator Style */
+        .update-indicator {
+            background-color: #ff3b30;
+            /* Red background */
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
         .screenshots-container {
             margin-top: 20px;
             overflow: hidden;
         }
+
         .screenshots {
             display: flex;
             overflow-x: auto;
@@ -95,9 +127,11 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
+
         .screenshots::-webkit-scrollbar {
             display: none;
         }
+
         .screenshot {
             flex: 0 0 auto;
             width: 200px;
@@ -107,14 +141,17 @@
             border-radius: 8px;
             object-fit: cover;
         }
+
         .section-title {
             margin-top: 30px;
             font-size: 17px;
             font-weight: 600;
         }
+
         .tags {
             margin-top: 10px;
         }
+
         .tag {
             display: inline-block;
             background-color: var(--tg-theme-secondary-bg-color, #f0f0f0);
@@ -127,10 +164,12 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://github.com/NileCast/AppGram/blob/2f8dcf9a495287bc7793c73df3fb7b07dea48e97/assets/Nilecast-Logo.png?raw=true" alt="NileCast icon" class="app-icon">
+            <img src="https://github.com/NileCast/AppGram/blob/2f8dcf9a495287bc7793c73df3fb7b07dea48e97/assets/Nilecast-Logo.png?raw=true"
+                alt="NileCast icon" class="app-icon">
             <div class="app-info">
                 <h1>NileCast: Connecting You to TV Worldwide</h1>
                 <p>Nile Broadcasting, Inc.</p>
@@ -154,18 +193,27 @@
         </div>
 
         <div class="button-container">
-            <button id="installBtn" class="button">Install</button>
+            <button id="installBtn" class="button">
+                Install
+                <span id="updateIndicator" class="update-indicator">New</span> <!-- New Indicator -->
+            </button>
             <button id="shareBtn" class="button">Share</button>
         </div>
 
         <div class="screenshots-container">
             <div id="screenshots" class="screenshots">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen0.png?raw=true" alt="NileCast screenshot 1" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen1.png?raw=true" alt="NileCast screenshot 2" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen2.png?raw=true" alt="NileCast screenshot 3" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen3.png?raw=true" alt="NileCast screenshot 4" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true" alt="NileCast screenshot 5" class="screenshot">
-                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true" alt="NileCast screenshot 6" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen0.png?raw=true"
+                    alt="NileCast screenshot 1" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen1.png?raw=true"
+                    alt="NileCast screenshot 2" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen2.png?raw=true"
+                    alt="NileCast screenshot 3" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen3.png?raw=true"
+                    alt="NileCast screenshot 4" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen4.png?raw=true"
+                    alt="NileCast screenshot 5" class="screenshot">
+                <img src="https://github.com/NileCast/AppGram/blob/main/assets/screenshots/screen5.png?raw=true"
+                    alt="NileCast screenshot 6" class="screenshot">
             </div>
         </div>
 
@@ -175,7 +223,9 @@
             <span class="tag">Streaming Content</span>
             <span class="tag">Live TV</span>
         </div>
-        <p>NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, access your favorite African and international channels with just a tap. Stream sports, movies, news, entertainment, and more—all in one convenient app.</p>
+        <p>NileCast brings you live TV streaming from Africa and beyond. Whether you're at home or on the go, access
+            your favorite African and international channels with just a tap. Stream sports, movies, news,
+            entertainment, and more—all in one convenient app.</p>
         <p>Powered By AppGram Inc.</p>
     </div>
 
@@ -185,47 +235,27 @@
         const installBtn = document.getElementById('installBtn');
         const shareBtn = document.getElementById('shareBtn');
 
-        installBtn.addEventListener('click', function() {
-            if (this.textContent === 'Install') {
+        // Install button functionality
+        installBtn.addEventListener('click', function () {
+            if (this.textContent.includes('Install')) {
                 initiateDownload();
-            } else if (this.textContent === 'Open') {
-                tg.showAlert('Opening NileCast app...');
-                // In a real scenario, you might use a custom URL scheme to open the app
-                // window.location.href = 'nilecast://open';
+                document.getElementById('updateIndicator').style.display = 'none'; // Hide the "New" indicator after install
             }
         });
 
-        shareBtn.addEventListener('click', function() {
-            tg.showPopup({
-                title: 'Share NileCast',
-                message: 'Would you like to share NileCast with your friends?',
-                buttons: [
-                    {id: 'share', type: 'ok', text: 'Share'},
-                    {id: 'cancel', type: 'cancel', text: 'Cancel'}
-                ]
-            }, function(buttonId) {
-                if (buttonId === 'share') {
-                    // Use the correct method name: shareAppUrl instead of shareUrl
-                    tg.shareAppUrl('https://t.me/nilecast');
-                }
-            });
+        // Share button functionality - Share the NileCast Bot link using Telegram's share functionality
+        shareBtn.addEventListener('click', function () {
+            tg.shareAppUrl('https://t.me/NileCast_Bot'); // Using Telegram's share functionality to share the bot link
         });
 
+        // Function to initiate download of APK
         function initiateDownload() {
-            // In a real implementation, this would make an API call to your backend
-            fetch('https://api.nilecast.tv/get-download-url')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.downloadUrl) {
-                        tg.showAlert('Download starting. Please check your notifications.');
-                        window.open(data.downloadUrl, '_blank');
-                        installBtn.textContent = 'Open';
-                    } else {
-                        tg.showAlert('Download failed. Please try again later.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    tg.showAlert('An error occurred. Please try again later.');
-                });
+            const downloadUrl = 'https://github.com/NileCast/AppGram/raw/refs/heads/main/build/NileCast.apk';
+
+            tg.showAlert('Download starting. Please check your notifications.');
+            window.open(downloadUrl, '_blank'); // Open the APK download URL in a new tab/window
         }
+    </script>
+</body>
+
+</html>
