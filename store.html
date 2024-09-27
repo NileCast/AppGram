@@ -24,7 +24,7 @@
         .app-icon {
             width: 96px;
             height: 96px;
-            border-radius: 20px;
+            border-radius: 25px;
             margin-bottom: 12px;
         }
         .app-info h1 {
@@ -38,8 +38,8 @@
         }
         .app-stats {
             background-color: white;
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 25px;
+            padding: 16px;
             margin-bottom: 16px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
@@ -67,7 +67,7 @@
             padding: 12px;
             text-align: center;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -80,12 +80,19 @@
             background-color: #34a853;
             color: white;
         }
+        .screenshots-container {
+            position: relative;
+            margin-bottom: 16px;
+            border-radius: 25px;
+            overflow: hidden;
+        }
         .screenshots {
             overflow-x: auto;
             white-space: nowrap;
-            margin-bottom: 16px;
-            scrollbar-width: none;  /* Firefox */
-            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+            padding: 8px;
         }
         .screenshots::-webkit-scrollbar { 
             width: 0;
@@ -96,8 +103,25 @@
             width: 200px;
             height: 355px;
             margin-right: 8px;
-            border-radius: 8px;
+            border-radius: 25px;
         }
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border: none;
+            border-radius: 25px;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .scroll-left { left: 8px; }
+        .scroll-right { right: 8px; }
         .section-title {
             font-size: 18px;
             font-weight: bold;
@@ -109,10 +133,17 @@
         .tag {
             display: inline-block;
             background-color: #e0e0e0;
-            padding: 4px 8px;
-            border-radius: 16px;
+            padding: 8px 16px;
+            border-radius: 25px;
             font-size: 12px;
             margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: #666;
         }
     </style>
 </head>
@@ -147,11 +178,15 @@
             <button class="button share-btn">Share</button>
         </div>
 
-        <div class="screenshots">
-            <img src="https://via.placeholder.com/200x355/FFD700/000000?text=Plex+1" alt="Plex screenshot 1" class="screenshot">
-            <img src="https://via.placeholder.com/200x355/4CAF50/FFFFFF?text=Plex+2" alt="Plex screenshot 2" class="screenshot">
-            <img src="https://via.placeholder.com/200x355/2196F3/FFFFFF?text=Plex+3" alt="Plex screenshot 3" class="screenshot">
-            <img src="https://via.placeholder.com/200x355/FF5722/FFFFFF?text=Plex+4" alt="Plex screenshot 4" class="screenshot">
+        <div class="screenshots-container">
+            <div class="screenshots" id="screenshots">
+                <img src="https://via.placeholder.com/200x355/FFD700/000000?text=Plex+1" alt="Plex screenshot 1" class="screenshot">
+                <img src="https://via.placeholder.com/200x355/4CAF50/FFFFFF?text=Plex+2" alt="Plex screenshot 2" class="screenshot">
+                <img src="https://via.placeholder.com/200x355/2196F3/FFFFFF?text=Plex+3" alt="Plex screenshot 3" class="screenshot">
+                <img src="https://via.placeholder.com/200x355/FF5722/FFFFFF?text=Plex+4" alt="Plex screenshot 4" class="screenshot">
+            </div>
+            <button class="scroll-btn scroll-left" onclick="scrollScreenshots(-1)">❮</button>
+            <button class="scroll-btn scroll-right" onclick="scrollScreenshots(1)">❯</button>
         </div>
 
         <h2 class="section-title">About this app</h2>
@@ -160,6 +195,18 @@
             <span class="tag">Streaming content</span>
         </div>
         <p>Stream movies and live TV on almost any device without a subscription.</p>
+
+        <footer class="footer">
+            Powered By AppGram Inc.
+        </footer>
     </div>
+
+    <script>
+        function scrollScreenshots(direction) {
+            const container = document.getElementById('screenshots');
+            const scrollAmount = 220; // Adjust this value based on your preference
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
